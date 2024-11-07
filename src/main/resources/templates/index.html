@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>InsertionSortHTTP Server - Default Page</title>
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #fafafa;
+        }
+        body {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+        #main {
+            background-color: #212121;
+            border-radius: 12px;
+            max-width: 600px;
+            width: fit-content;
+            padding: 1rem;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <h1>{{TITLE}}</h1>
+    <p>
+        Dies ist eine simple Implementation des InsertionSort-Algorithmus in Kombination mit einem HTTP-Server
+    </p>
+    <p>
+        Der HTTP-Server wurde ohne Framework und mit einem <code>java.net.ServerSocket</code> umgesetzt und unterstützt den zwingend erforderlichen Teil des HTTP-Protokolls in der Version 1.1 (HTTP/1.1).
+    </p>
+    <form style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%" id="form">
+        <input type="text" name="numbers" placeholder="Zahlen eingeben und mit Komme trennen" style="padding: 0.5rem; flex: 100%;">
+        <button type="submit" style="flex: 100%; padding: 0.5rem; width: 100%">Sortieren</button>
+    </form>
+    <script defer async>
+        const form = document.getElementById("form");
+        form.onsubmit = (ev) => {
+            ev.preventDefault();
+            const fd = new FormData(form);
+            const numbers = fd.get("numbers").split(",").map(n => parseInt(n.trim()));
+            window.open("/" + numbers.join(","), "_blank");
+        }
+    </script>
+</div>
+</body>
+</html>
